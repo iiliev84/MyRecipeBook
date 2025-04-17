@@ -42,14 +42,9 @@ function RecipesList({setselectedRecipe, recipe, setRecipe, favoriteRecipe, setF
           <button 
             onClick={() => handleClick(recipe)} 
             disabled={!token}>
-            {token ? "Add to Favorite" : "Log In to add to Favorite"}
+            {token ? "Add to Favorites" : "Log In to add to Favorites"}
           </button>
-          <button 
-            onClick={() => handleSeeDetails(setselectedRecipe)} 
-            
-            disabled={!token}>
-            {token ? "See Details" : "See Details"}
-          </button>
+         
         </div>
         
       ))}
