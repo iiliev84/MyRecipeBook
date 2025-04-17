@@ -6,12 +6,14 @@ import LogIn from './components/LogIn';
 import RecipeList from './components/RecipeList';
 import Authorization from './components/Authorization';
 import Favorite from './components/Favorite';
+import SelectedRecipe from './components/SelectedRecipe';
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [recipe, setRecipe] = useState([]);
   const [favoriteRecipe, setFavRecipe] = useState(null);
   const navigate = useNavigate();
+  const [ selectedRecipeId, setSelectedRecipeId] = useState(null)
 
   useEffect(() => {
     if (token) {
@@ -21,21 +23,14 @@ function App() {
     }
   }, [token]);
 
-  const handleLogout = () => {
-    setToken(null);
-    localStorage.removeItem("token");
-    navigate("/register");
-  };
-
   return (
     <>
       <nav>
         <Link to="/">Home</Link>
-        <Link to="/favorite">Favorites</Link>
-        <Link to="/register">Register</Link>
-        <Link to="/login">Log In</Link>
-        <Link to="/auth">Authorization</Link>
-        {token && <button onClick={handleLogout}>Logout</button>} 
+        <Link to="/Favorite">Favorites</Link>
+        <Link to="/Register">Register</Link>
+        <Link to="/LogIn">Log In</Link>
+        <Link to="/Authorization">Authorization</Link>
       </nav>
 
       <h1>Recipes</h1>
@@ -44,15 +39,17 @@ function App() {
           <Route
             path="/"
             element={
-          <RecipeList recipe={recipe} setRecipe={setRecipe} favoriteRecipe={favoriteRecipe} setFavRecipe={setFavRecipe} token={token} />} /> 
-          <Route path="/register" element={<Register setToken={setToken} />} />
-          <Route path="/login" element={<LogIn token={token} setToken={setToken}/>}/>
-          <Route path="/auth" element={<Authorization token={token} />} />
+          <RecipeList recipe={recipe} setRecipe={setRecipe} favoriteRecipe={favoriteRecipe} setFavRecipe={setFavRecipe}  token={token} />} /> 
+          <Route path="/Register" element={<Register setToken={setToken} />} />
+          <Route path="/LogIn" element={<LogIn token={token} setToken={setToken}/>}/>
+          <Route path="/Authorization" element={<Authorization token={token} />} />
           <Route
-            path="/favorite"
+            path="/Favorite"
             element={token ? <Favorite favoriteRecipe={favoriteRecipe} setFavRecipe={setFavRecipe} /> : <Navigate to="/signup" />}
           />
+          <Route path="/SelectedRecipe" element={<SelectedRecipe />} />
       </Routes>
+                
     </>
   );
 }

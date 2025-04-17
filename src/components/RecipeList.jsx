@@ -1,9 +1,10 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import {  useNavigate } from "react-router-dom";
+import RecipeRow from "./RecipeRow";
 
-function RecipesList({ recipe, setRecipe, favoriteRecipe, setFavRecipe, token }) {
+function RecipesList({setselectedRecipe, recipe, setRecipe, favoriteRecipe, setFavRecipe, token }) {
   const navigate = useNavigate();
-
+  
   useEffect(() => {
     async function fetchRecipes() {
       try {
@@ -19,7 +20,12 @@ function RecipesList({ recipe, setRecipe, favoriteRecipe, setFavRecipe, token })
 
   const handleClick = (recipe) => {
     setFavRecipe(recipe);
-  };
+  }; 
+  
+  const handleSeeDetails = (setselectedRecipe) => {
+    setselectedRecipe(setselectedRecipe);
+  }; 
+    
 
   return (
     <>
@@ -36,8 +42,16 @@ function RecipesList({ recipe, setRecipe, favoriteRecipe, setFavRecipe, token })
             disabled={!token}>
             {token ? "Add to Favorite" : "Log In to add to Favorite"}
           </button>
+          <button 
+            onClick={() => handleSeeDetails(setselectedRecipe)} 
+            
+            disabled={!token}>
+            {token ? "See Details" : "See Details"}
+          </button>
         </div>
+        
       ))}
+    
     </>
   );
 }
