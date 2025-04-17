@@ -33,7 +33,7 @@ function App() {
         <Link to="/Authorization">Authorization</Link>
       </nav>
 
-      <h1>Recipes</h1>
+      
 
       <Routes>
           <Route

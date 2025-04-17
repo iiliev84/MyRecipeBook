@@ -22,13 +22,15 @@ function RecipesList({setselectedRecipe, recipe, setRecipe, favoriteRecipe, setF
     setFavRecipe(recipe);
   }; 
   
-  const handleSeeDetails = (setselectedRecipe) => {
-    setselectedRecipe(setselectedRecipe);
-  }; 
+
+  const handleSeeDetails = () =>{
+    setselectedRecipe(setselectedRecipe)   
+}
     
 
   return (
     <>
+    <h1>Recipes</h1>
       {recipe.map((recipe) => (
         <div key={recipe.idMeal}>
           <h2>{recipe.strMeal}</h2>

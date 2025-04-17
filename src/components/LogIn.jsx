@@ -49,5 +49,4 @@ function LogIn({setToken}){
         </form>
     )
 }
-
 export default LogIn
