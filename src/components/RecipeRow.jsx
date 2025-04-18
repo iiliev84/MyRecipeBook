@@ -1,17 +1,18 @@
-import { Link } from "react-router-dom"
-
 function RecipeRow({selectedRecipe, setselectedRecipe}){
     return(
         <>
-        <p>Name: {selectedRecipe.strMeal}</p>
-        <img src={selectedRecipe.strMealThumb} style={{height: "200px"}} onClick={() => {
-             selectedRecipe(setselectedRecipe.idMeal);
-           }}/>
-        <p>Category: {selectedRecipe.strCategory}</p>
-        <p>Origin: {selectedRecipe.strArea}</p>
-        \<button onClick={() => setselectedRecipe(null)}>Back</button>
+        <div className="details-container">
+        <h2>{selectedRecipe.strMeal}</h2>
+        <img src={selectedRecipe.strMealThumb} style={{ height: "200px" }}/>
+        <p>Category:{selectedRecipe.strCategory}</p>
+        <p>Area:{selectedRecipe.strArea}</p>
+        <p>Ingredients: {selectedRecipe.ingredients}</p>
+        <p>Instructions: {selectedRecipe.strInstructions}</p>
+        <button onClick={()=> setselectedRecipe(null)} className="button">Go Back</button>
+        </div>
         </>
     )
 }
+
 
 export default RecipeRow

@@ -2,8 +2,10 @@ import { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
 import RecipeRow from "./RecipeRow";
 
-function RecipesList({setselectedRecipe, recipe, setRecipe, favoriteRecipe, setFavRecipe, token }) {
+function RecipesList({setselectedRecipe, token }) {
   const navigate = useNavigate();
+  const [recipe, setRecipe] = useState([])
+  const [favorite, setFavorite] = useState([])
   
   useEffect(() => {
     async function fetchRecipes() {
@@ -19,13 +21,8 @@ function RecipesList({setselectedRecipe, recipe, setRecipe, favoriteRecipe, setF
   }, [setRecipe]);
 
   const handleClick = (recipe) => {
-    setFavRecipe(recipe);
+    setFavorite(recipe);
   }; 
-  
-
-  const handleSeeDetails = () =>{
-    setselectedRecipe(setselectedRecipe)   
-}
     
 
   return (
@@ -37,14 +34,13 @@ function RecipesList({setselectedRecipe, recipe, setRecipe, favoriteRecipe, setF
           <img src={recipe.strMealThumb} style={{ height: "200px" }} />
           <p>Category: {recipe.strCategory}</p>
           <p>Area: {recipe.strArea}</p>
-          <p>Instructions: {recipe.strInstructions}</p>
-          <p>Ingredients: {recipe.ingredients}</p>
+          <button onClick={()=> {
+                setselectedRecipe(recipe)}} className='button'>Recipe Details</button>
           <button 
             onClick={() => handleClick(recipe)} 
             disabled={!token}>
             {token ? "Add to Favorites" : "Log In to add to Favorites"}
           </button>
-         
         </div>
         
       ))}
