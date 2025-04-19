@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import {  useNavigate } from "react-router-dom";
-import RecipeRow from "./RecipeRow";
 
 function RecipesList({setselectedRecipe, token }) {
   const navigate = useNavigate();
@@ -18,12 +17,32 @@ function RecipesList({setselectedRecipe, token }) {
       }
     }
     fetchRecipes();
-  }, [setRecipe]);
-
-  const handleClick = (recipe) => {
-    setFavorite(recipe);
-  }; 
-    
+  }, [setRecipe]); 
+  
+  const handleAddFavorites = async (recipe) => {
+    if (!token) {
+        alert("You're not logged in!")
+        return
+      }
+      try {
+        const response = await fetch("https://fsa-recipe.up.railway.app/api/favorites", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            mealId: recipe.idMeal,
+            name: recipe.strMeal,
+            imageUrl: recipe.strMealThumb
+          }),
+        })  
+          const result = await response.json()
+          setFavorite((prevFavorites) => [...prevFavorites, result])
+      } catch (error) {
+        console.error("Error adding favorite:", error)
+      }
+    }
 
   return (
     <>
@@ -34,10 +53,8 @@ function RecipesList({setselectedRecipe, token }) {
           <img src={recipe.strMealThumb} style={{ height: "200px" }} />
           <p>Category: {recipe.strCategory}</p>
           <p>Area: {recipe.strArea}</p>
-          <button onClick={()=> {
-                setselectedRecipe(recipe)}} className='button'>Recipe Details</button>
-          <button 
-            onClick={() => handleClick(recipe)} 
+          <button onClick={()=> { setselectedRecipe(recipe) }} className='button'>Recipe Details</button>
+          <button onClick={() =>  handleAddFavorites(recipe)}
             disabled={!token}>
             {token ? "Add to Favorites" : "Log In to add to Favorites"}
           </button>

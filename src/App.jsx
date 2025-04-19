@@ -6,19 +6,14 @@ import LogIn from './components/LogIn';
 import RecipeList from './components/RecipeList';
 import Authorization from './components/Authorization';
 import Favorite from './components/Favorite';
-import SelectedRecipe from './components/SelectedRecipe';
 import RecipeRow from './components/RecipeRow';
 
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
-  const [recipe, setRecipe] = useState([]);
-  const [favoriteRecipe, setFavRecipe] = useState(null);
-  const navigate = useNavigate();
   const [selectedRecipe, setselectedRecipe] = useState(null) 
   const [recipes, setRecipes] = useState([])
   const [favorite, setFavorite] = useState([])
-  const [username, setUsername] = useState([])
 
 
   useEffect(() => {
@@ -29,6 +24,26 @@ function App() {
     }
   }, [token]);
 
+  useEffect(()=>{
+    const getFav = async ()=> {
+      if(!token) return
+  
+    try{
+      const response = await fetch ("https://fsa-recipe.up.railway.app/api/favorites", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        }
+      })
+      const result = await response.json()
+      console.log("Favorite", result)
+      setFavorite(result.data)
+    }catch(error){
+      console.log("error")
+    }
+  }
+  getFav()}, [token])  
+
   return (
     <>
       <nav>
@@ -36,10 +51,8 @@ function App() {
         <Link to="/Favorite">Favorites</Link>
         <Link to="/Register">Register</Link>
         <Link to="/LogIn">Log In</Link>
-        <Link to="/Authorization">Authorization</Link>
+        <Link to="/Authorization">Authorization Info</Link>
       </nav>
-
-      
       
       <Routes>
           <Route path="/Register" element={<Register setToken={setToken} />} />
@@ -49,14 +62,8 @@ function App() {
               <div>
               {selectedRecipe ? <RecipeRow selectedRecipe={selectedRecipe} setselectedRecipe={setselectedRecipe} />
                : <RecipeList recipes={recipes} setRecipes={setRecipes} setselectedRecipe={setselectedRecipe} favorite={favorite} setFavorite={setFavorite} token={token}/>}
-               </div>
-              }/>
-          <Route path='/favorite' element={
-            <div>
-             {favorite ? <Favorite favorite={favorite} setFavorite={setFavorite}/>
-              : <p>No Favorites Saved Yet! Add Favorites!</p>}
-              </div>
-            }/>
+               </div> }/>
+          <Route path='/Favorite' element={<Favorite favorite={favorite} setFavorite={setFavorite}/>}/>
       </Routes>
                 
     </>
