@@ -34,7 +34,8 @@ function RecipesList({setselectedRecipe, token }) {
           body: JSON.stringify({
             mealId: recipe.idMeal,
             name: recipe.strMeal,
-            imageUrl: recipe.strMealThumb
+            imageUrl: recipe.strMealThumb,
+            strArea: recipe.strArea
           }),
         })  
           const result = await response.json()
@@ -43,6 +44,7 @@ function RecipesList({setselectedRecipe, token }) {
         console.error("Error adding favorite:", error)
       }
     }
+   
 
   return (
     <>
