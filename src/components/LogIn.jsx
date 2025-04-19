@@ -1,8 +1,10 @@
 import {useState} from 'react'
+import { useNavigate } from 'react-router-dom';
 
 function LogIn({setToken}){
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate();
 
     async function handleSubmit(e){
         e.preventDefault();
@@ -45,7 +47,7 @@ function LogIn({setToken}){
                 />
             </label>
             <br/>
-            <button>Log In!</button>
+            <button onClick={() => {navigate("/");}}>LogIn</button>
         </form>
     )
 }

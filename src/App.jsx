@@ -47,6 +47,7 @@ function App() {
   }
   getFav()}, [token]) 
 
+
   return (
     <>
       <nav>
@@ -55,7 +56,7 @@ function App() {
         <Link to="/Register">Register</Link>
         <Link to="/LogIn">Log In</Link>
         <Link to="/Authorization">Authorization Info</Link>
-        <button onClick={() => {logout(); navigate("/");}}>Logout</button>
+        <button onClick={() => {logout(); navigate("/");}}>LogOut</button>
       </nav>
       
       <Routes>
