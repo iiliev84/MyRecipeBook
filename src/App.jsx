@@ -14,7 +14,11 @@ function App() {
   const [selectedRecipe, setselectedRecipe] = useState(null) 
   const [recipes, setRecipes] = useState([])
   const [favorite, setFavorite] = useState([])
+  const navigate = useNavigate();
 
+  const logout = () => {
+    localStorage.removeItem("token");
+}
 
   useEffect(() => {
     if (token) {
@@ -36,13 +40,12 @@ function App() {
         }
       })
       const result = await response.json()
-      console.log("Favorite", result)
       setFavorite(result.data)
     }catch(error){
       console.log("error")
     }
   }
-  getFav()}, [token])  
+  getFav()}, [token]) 
 
   return (
     <>
@@ -52,6 +55,7 @@ function App() {
         <Link to="/Register">Register</Link>
         <Link to="/LogIn">Log In</Link>
         <Link to="/Authorization">Authorization Info</Link>
+        <button onClick={() => {logout(); navigate("/");}}>Logout</button>
       </nav>
       
       <Routes>

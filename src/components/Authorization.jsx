@@ -37,7 +37,7 @@ function Authorization({ token }) {
           <h3>Token {token}</h3>
         </div>
       ) : (
-        <h2>Please Sign Up and Log In</h2>
+        <h2>Please Register and Log In</h2>
       )}
     </>
   );

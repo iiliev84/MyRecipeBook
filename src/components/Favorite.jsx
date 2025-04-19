@@ -1,6 +1,6 @@
 function Favorite({favorite, setFavorite}){
 
-    const handleRemoveFavorite = async (recipeId) => {
+    const removeFavorite = async (recipeId) => {
         const token = localStorage.getItem("token")
         const confirm = window.confirm("Confirm favorite removal.")
         if (!confirm) return    
@@ -23,13 +23,13 @@ function Favorite({favorite, setFavorite}){
             <p>No Favorite Recipes Added</p>
           ) : (
             favorite.map((fav) => {
-              const recipe = fav.recipe || fav;
+              const setselectedRecipe = fav.recipe || fav;
               return (
-                <div key={recipe.idMeal} className='card'>
-                  <h3>{recipe.strMeal}</h3>
-                  <img src={recipe.strMealThumb} style={{ height: "200px" }} />
+                <div key={setselectedRecipe.idMeal} className='card'>
+                  <h3>{setselectedRecipe.strMeal}</h3>
+                  <img src={setselectedRecipe.strMealThumb} style={{ height: "200px" }} />
                   <br></br>
-                  <button onClick={() => handleRemoveFavorite(fav.id)} > Remove Favorite </button>
+                  <button onClick={() => removeFavorite(fav.id)} > Remove Favorite </button>
                 </div>
               );
             })

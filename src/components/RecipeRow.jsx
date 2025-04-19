@@ -1,7 +1,7 @@
 function RecipeRow({selectedRecipe, setselectedRecipe}){
     return(
         <>
-        <div className="details-container">
+        <div>
         <h2>{selectedRecipe.strMeal}</h2>
         <img src={selectedRecipe.strMealThumb} style={{ height: "200px" }}/>
         <p>Category:{selectedRecipe.strCategory}</p>

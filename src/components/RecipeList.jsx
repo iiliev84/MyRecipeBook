@@ -19,7 +19,7 @@ function RecipesList({setselectedRecipe, token }) {
     fetchRecipes();
   }, [setRecipe]); 
   
-  const handleAddFavorites = async (recipe) => {
+  const addFavorites = async (recipe) => {
     if (!token) {
         alert("You're not logged in!")
         return
@@ -54,7 +54,7 @@ function RecipesList({setselectedRecipe, token }) {
           <p>Category: {recipe.strCategory}</p>
           <p>Area: {recipe.strArea}</p>
           <button onClick={()=> { setselectedRecipe(recipe) }} className='button'>Recipe Details</button>
-          <button onClick={() =>  handleAddFavorites(recipe)}
+          <button onClick={() =>  addFavorites(recipe)}
             disabled={!token}>
             {token ? "Add to Favorites" : "Log In to add to Favorites"}
           </button>
