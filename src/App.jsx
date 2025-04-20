@@ -1,5 +1,5 @@
 import { useState , useEffect} from 'react'
-import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './App.css'
 import Register from './components/Register';
 import LogIn from './components/LogIn';
@@ -8,18 +8,13 @@ import Authorization from './components/Authorization';
 import Favorite from './components/Favorite';
 import RecipeRow from './components/RecipeRow';
 import RandomRecipe from './components/Random';
-
+import Nav from './components/Nav';
 
 function App() {
   const [token, setToken] = useState(() => localStorage.getItem("token"));
   const [selectedRecipe, setselectedRecipe] = useState(null) 
   const [recipes, setRecipes] = useState([])
   const [favorite, setFavorite] = useState([])
-  const navigate = useNavigate();
-
-  const logout = () => {
-    localStorage.removeItem("token");
-}
 
   useEffect(() => {
     if (token) {
@@ -51,15 +46,7 @@ function App() {
 
   return (
     <>
-      <nav>
-        <Link to="/">Home</Link>
-        <Link to="/Favorite">Favorites</Link>
-        <Link to="/Random">Random</Link>
-        <Link to="/Register">Register</Link>
-        <Link to="/LogIn">Log In</Link>
-        <Link to="/Authorization">Authorization Info</Link>
-        <button onClick={() => {logout(); navigate("/");}}>LogOut</button>
-      </nav>
+      <Nav />
       
       <Routes>
           <Route path="/Random" element={<RandomRecipe />} />

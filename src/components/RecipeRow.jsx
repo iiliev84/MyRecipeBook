@@ -8,13 +8,11 @@ function RecipeRow({selectedRecipe, setselectedRecipe}){
         <p>Tags: {selectedRecipe.strTags}</p>
         <p>Area: {selectedRecipe.strArea}</p>
         <p>Ingredients: {selectedRecipe.ingredients}</p>
-        <p>Instructions: {selectedRecipe.strInstructions}</p>
-        <a href={selectedRecipe.strYoutube}> Watch on YouTube </a>
+        <p>Instructions: {selectedRecipe.strInstructions}</p>       
         <button onClick={()=> setselectedRecipe(null)} className="button">Go Back</button>
         </div>
         </>
     )
 }
-
 
 export default RecipeRow
