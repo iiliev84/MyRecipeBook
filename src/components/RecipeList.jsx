@@ -1,8 +1,6 @@
 import { useEffect, useState } from "react";
-import {  useNavigate } from "react-router-dom";
 
 function RecipesList({setselectedRecipe, token }) {
-  const navigate = useNavigate();
   const [recipe, setRecipe] = useState([])
   const [favorite, setFavorite] = useState([])
   
@@ -39,7 +37,7 @@ function RecipesList({setselectedRecipe, token }) {
           }),
         })  
           const result = await response.json()
-          setFavorite((prevFavorites) => [...prevFavorites, result])
+          setFavorite((prevFavorites) => [prevFavorites, result])
       } catch (error) {
         console.error("Error adding favorite:", error)
       }

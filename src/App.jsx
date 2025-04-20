@@ -7,6 +7,7 @@ import RecipeList from './components/RecipeList';
 import Authorization from './components/Authorization';
 import Favorite from './components/Favorite';
 import RecipeRow from './components/RecipeRow';
+import RandomRecipe from './components/Random';
 
 
 function App() {
@@ -53,6 +54,7 @@ function App() {
       <nav>
         <Link to="/">Home</Link>
         <Link to="/Favorite">Favorites</Link>
+        <Link to="/Random">Random</Link>
         <Link to="/Register">Register</Link>
         <Link to="/LogIn">Log In</Link>
         <Link to="/Authorization">Authorization Info</Link>
@@ -60,6 +62,7 @@ function App() {
       </nav>
       
       <Routes>
+          <Route path="/Random" element={<RandomRecipe />} />
           <Route path="/Register" element={<Register setToken={setToken} />} />
           <Route path="/LogIn" element={<LogIn token={token} setToken={setToken}/>}/>
           <Route path="/Authorization" element={<Authorization token={token} />} />
