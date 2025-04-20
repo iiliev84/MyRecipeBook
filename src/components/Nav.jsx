@@ -9,7 +9,7 @@ const navigate = useNavigate();
     return (
         <nav>
         <Link to="/">Home</Link>
-        <Link to="/Favorite">Favorites</Link>
+        <Link to="/Favorite" >Favorites</Link>
         <Link to="/Random">Random</Link>
         <Link to="/Register">Register</Link>
         <Link to="/LogIn">Log In</Link>

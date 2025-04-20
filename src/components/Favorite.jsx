@@ -1,4 +1,27 @@
-function Favorite({favorite, setFavorite}){
+import { useState, useEffect } from "react"
+
+function Favorite(){
+
+    const [favorite, setFavorite] = useState([])
+    const [token] = useState(() => localStorage.getItem("token"));
+
+    const getFavorites = async () => {
+        const res = await fetch("https://fsa-recipe.up.railway.app/api/favorites", {
+          headers: {
+            Authorization: `Bearer ${token}`
+          }
+        })
+        const result = await res.json()
+        setFavorite(result.data)
+      }
+    
+      useEffect(() => {
+        if (token) {
+          getFavorites()
+        }
+      }, [token])
+    
+
 
     const removeFavorite = async (recipeId) => {
         const token = localStorage.getItem("token")

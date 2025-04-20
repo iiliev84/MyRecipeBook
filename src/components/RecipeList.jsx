@@ -37,7 +37,7 @@ function RecipesList({setselectedRecipe, token }) {
           }),
         })  
           const result = await response.json()
-          setFavorite((prevFavorites) => [...prevFavorites, result])
+          setFavorite(previous => [...previous, result.data]);
       } catch (error) {
         console.error("Error adding favorite:", error)
       }
