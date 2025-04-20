@@ -26,10 +26,11 @@ function LogIn({setToken}){
         }
     }
     return(
+        <>
+        <h2>Log In</h2>
         <form onSubmit={handleSubmit}>
             <label>
-                Username:
-                <input
+                Username: <input
                     name="username"
                     onChange={(e)=>setUsername(e.target.value)}
                     value={username}
@@ -38,8 +39,7 @@ function LogIn({setToken}){
             </label>
             <br/>
             <label>
-                Password:
-                <input
+                Password: <input
                     name = "password"
                     onChange={(e)=>setPassword(e.target.value)}
                     value={password}
@@ -49,6 +49,7 @@ function LogIn({setToken}){
             <br/>
             <button onClick={() => {navigate("/");}}>LogIn</button>
         </form>
+        </>
     )
 }
 export default LogIn
