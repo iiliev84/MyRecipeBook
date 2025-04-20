@@ -4,6 +4,7 @@ function Nav () {
 const navigate = useNavigate();
   const logout = () => {
     localStorage.removeItem("token");
+    window.location.reload(true);
 }
     return (
         <nav>
@@ -13,7 +14,7 @@ const navigate = useNavigate();
         <Link to="/Register">Register</Link>
         <Link to="/LogIn">Log In</Link>
         <Link to="/Authorization">Authorization Info</Link>
-        <button onClick={() => {logout(); navigate("/");}}>LogOut</button>
+        <button onClick={() => {navigate("/"); logout(); }}>LogOut</button>
       </nav>
     )
 
